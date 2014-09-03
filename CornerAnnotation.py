@@ -147,7 +147,6 @@ class CornerAnnotationWidget:
     self.node4Selector.showChildNodeTypes = False
     self.node4Selector.setMRMLScene( slicer.mrmlScene )
 
-
     #
     # Check box for displaying right upper annotation
     #
@@ -162,7 +161,6 @@ class CornerAnnotationWidget:
     self.leftUpperCheckBox.enabled = True
     self.leftUpperCheckBox.checked = False
 
-
     #
     # Check box for displaying right upper annotation
     #
@@ -176,7 +174,6 @@ class CornerAnnotationWidget:
     self.rightBottomCheckBox.text = "Enable"
     self.rightBottomCheckBox.enabled = True
     self.rightBottomCheckBox.checked = False
-
 
     #
     # Check box for displaying right upper annotation
