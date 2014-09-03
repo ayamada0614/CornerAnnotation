@@ -11,12 +11,12 @@ class CornerAnnotation:
     parent.title = "CornerAnnotation" # TODO make this more human readable by adding spaces
     parent.categories = ["IGT"]
     parent.dependencies = []
-    parent.contributors = ["Atsushi Yamada (Shiga University of Medical Science in Japan)"] # replace with "Firstname Lastname (Org)"
+    parent.contributors = ["Atsushi Yamada (SUMS), Junichi Tokuda (Brigham and Women's Hospital), Koichiro Murakami (BWH, SUMS), Soichiro Tani (SUMS), Shigeyuki Naka (SUMS), Tohru Tani (SUMS)"] # replace with "Firstname Lastname (Org)"
     parent.helpText = """
-    This is an example of scripted loadable module bundled in an extension.
+    This module allows user to create annotations including timer count and transform node elements and display them. The details are in http://www.slicer.org/slicerWiki/index.php/Documentation/Nightly/Modules/CornerAnnotation
     """
     parent.acknowledgementText = """
-    This file was originally developed by Jean-Christophe Fillion-Robin, Kitware Inc. and Steve Pieper, Isomics, Inc.  and was partially funded by NIH grant 3P41RR013218-12S1.
+    This module was developed by Atsushi Yamada (Shiga University of Medical Science in Japan), Bio-Medical Innovation Center and Department of Surgery, Shiga University of Medical Science. 
 """ # replace with organization, grant and thanks.
     self.parent = parent
 
@@ -58,7 +58,7 @@ class CornerAnnotationWidget:
     #
     reloadCollapsibleButton = ctk.ctkCollapsibleButton()
     reloadCollapsibleButton.text = "Reload && Test"
-    self.layout.addWidget(reloadCollapsibleButton)
+    #self.layout.addWidget(reloadCollapsibleButton)
     reloadFormLayout = qt.QFormLayout(reloadCollapsibleButton)
 
     # reload button
@@ -67,7 +67,7 @@ class CornerAnnotationWidget:
     self.reloadButton = qt.QPushButton("Reload")
     self.reloadButton.toolTip = "Reload this module."
     self.reloadButton.name = "CornerAnnotation Reload"
-    reloadFormLayout.addWidget(self.reloadButton)
+    #reloadFormLayout.addWidget(self.reloadButton)
     self.reloadButton.connect('clicked()', self.onReload)
 
     # reload and test button
@@ -75,7 +75,7 @@ class CornerAnnotationWidget:
     #  your module to users)
     self.reloadAndTestButton = qt.QPushButton("Reload and Test")
     self.reloadAndTestButton.toolTip = "Reload this module and then run the self tests."
-    reloadFormLayout.addWidget(self.reloadAndTestButton)
+    #reloadFormLayout.addWidget(self.reloadAndTestButton)
     self.reloadAndTestButton.connect('clicked()', self.onReloadAndTest)
 
     #
@@ -102,13 +102,51 @@ class CornerAnnotationWidget:
     # Transform matrix for left bottom annotation (vtkMRMLLinearTransformNode)
     #
     self.node1Selector = slicer.qMRMLNodeComboBox()
-    self.node1Selector.nodeTypes = ( ("vtkMRMLLinearTransformNode"), "" )
+    #self.node1Selector.nodeTypes = ( ("vtkMRMLLinearTransformNode"), "" )
+    self.node1Selector.nodeTypes = ['vtkMRMLLinearTransformNode', 'vtkMRMLAnnotationTextNode']
     self.node1Selector.addEnabled = False
     self.node1Selector.removeEnabled = False
     self.node1Selector.noneEnabled =  True
     self.node1Selector.showHidden = False
     self.node1Selector.showChildNodeTypes = False
     self.node1Selector.setMRMLScene( slicer.mrmlScene )
+
+    #
+    # Transform matrix for left upper annotation (vtkMRMLLinearTransformNode)
+    #
+    self.node2Selector = slicer.qMRMLNodeComboBox()
+    self.node2Selector.nodeTypes = ['vtkMRMLLinearTransformNode', 'vtkMRMLAnnotationTextNode']
+    self.node2Selector.addEnabled = False
+    self.node2Selector.removeEnabled = False
+    self.node2Selector.noneEnabled =  True
+    self.node2Selector.showHidden = False
+    self.node2Selector.showChildNodeTypes = False
+    self.node2Selector.setMRMLScene( slicer.mrmlScene )
+
+    #
+    # Transform matrix for left upper annotation (vtkMRMLLinearTransformNode)
+    #
+    self.node3Selector = slicer.qMRMLNodeComboBox()
+    self.node3Selector.nodeTypes = ['vtkMRMLLinearTransformNode', 'vtkMRMLAnnotationTextNode']
+    self.node3Selector.addEnabled = False
+    self.node3Selector.removeEnabled = False
+    self.node3Selector.noneEnabled =  True
+    self.node3Selector.showHidden = False
+    self.node3Selector.showChildNodeTypes = False
+    self.node3Selector.setMRMLScene( slicer.mrmlScene )
+
+    #
+    # Transform matrix for right upper annotation (vtkMRMLLinearTransformNode)
+    #
+    self.node4Selector = slicer.qMRMLNodeComboBox()
+    self.node4Selector.nodeTypes = ['vtkMRMLLinearTransformNode', 'vtkMRMLAnnotationTextNode']
+    self.node4Selector.addEnabled = False
+    self.node4Selector.removeEnabled = False
+    self.node4Selector.noneEnabled =  True
+    self.node4Selector.showHidden = False
+    self.node4Selector.showChildNodeTypes = False
+    self.node4Selector.setMRMLScene( slicer.mrmlScene )
+
 
     #
     # Check box for displaying right upper annotation
@@ -124,17 +162,6 @@ class CornerAnnotationWidget:
     self.leftUpperCheckBox.enabled = True
     self.leftUpperCheckBox.checked = False
 
-    #
-    # Transform matrix for left upper annotation (vtkMRMLLinearTransformNode)
-    #
-    self.node2Selector = slicer.qMRMLNodeComboBox()
-    self.node2Selector.nodeTypes = ( ("vtkMRMLLinearTransformNode"), "" )
-    self.node2Selector.addEnabled = False
-    self.node2Selector.removeEnabled = False
-    self.node2Selector.noneEnabled =  True
-    self.node2Selector.showHidden = False
-    self.node2Selector.showChildNodeTypes = False
-    self.node2Selector.setMRMLScene( slicer.mrmlScene )
 
     #
     # Check box for displaying right upper annotation
@@ -150,17 +177,6 @@ class CornerAnnotationWidget:
     self.rightBottomCheckBox.enabled = True
     self.rightBottomCheckBox.checked = False
 
-    #
-    # Transform matrix for left upper annotation (vtkMRMLLinearTransformNode)
-    #
-    self.node3Selector = slicer.qMRMLNodeComboBox()
-    self.node3Selector.nodeTypes = ( ("vtkMRMLLinearTransformNode"), "" )
-    self.node3Selector.addEnabled = False
-    self.node3Selector.removeEnabled = False
-    self.node3Selector.noneEnabled =  True
-    self.node3Selector.showHidden = False
-    self.node3Selector.showChildNodeTypes = False
-    self.node3Selector.setMRMLScene( slicer.mrmlScene )
 
     #
     # Check box for displaying right upper annotation
@@ -241,19 +257,6 @@ class CornerAnnotationWidget:
 
     # Layout within the collapsible button
     configurationFormLayout = qt.QFormLayout(configurationCollapsibleButton)
-
-
-    #
-    # Transform matrix for right upper annotation (vtkMRMLLinearTransformNode)
-    #
-    self.node4Selector = slicer.qMRMLNodeComboBox()
-    self.node4Selector.nodeTypes = ( ("vtkMRMLLinearTransformNode"), "" )
-    self.node4Selector.addEnabled = False
-    self.node4Selector.removeEnabled = False
-    self.node4Selector.noneEnabled =  True
-    self.node4Selector.showHidden = False
-    self.node4Selector.showChildNodeTypes = False
-    self.node4Selector.setMRMLScene( slicer.mrmlScene )
 
     self.threeDViewCheckBox = ctk.ctkCheckBox()
     self.threeDViewCheckBox.text = "3D"
