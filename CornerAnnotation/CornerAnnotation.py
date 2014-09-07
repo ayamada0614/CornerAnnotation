@@ -91,14 +91,6 @@ class CornerAnnotationWidget:
     annotationFormLayout = qt.QFormLayout(annotationCollapsibleButton)
 
     #
-    # Check box for left bottom annotation
-    #
-    self.leftBottomCheckBox = ctk.ctkCheckBox()
-    self.leftBottomCheckBox.text = "Enable"
-    self.leftBottomCheckBox.enabled = True
-    self.leftBottomCheckBox.checked = False
-
-    #
     # Transform matrix for left bottom annotation (vtkMRMLLinearTransformNode)
     #
     self.node1Selector = slicer.qMRMLNodeComboBox()
@@ -148,6 +140,14 @@ class CornerAnnotationWidget:
     self.node4Selector.setMRMLScene( slicer.mrmlScene )
 
     #
+    # Check box for left bottom annotation
+    #
+    self.leftBottomCheckBox = ctk.ctkCheckBox()
+    self.leftBottomCheckBox.text = "Enable"
+    self.leftBottomCheckBox.enabled = True
+    self.leftBottomCheckBox.checked = False
+
+    #
     # Check box for displaying right upper annotation
     #
     self.leftBottomTextBox = qt.QLineEdit()
@@ -195,6 +195,7 @@ class CornerAnnotationWidget:
     self.rightUpperTextBox = qt.QLineEdit()
     self.rightUpperTextBox.enabled = True
 
+
     self.textLable1 = qt.QLabel()
     self.textLable1.setText("Text:")
 
@@ -207,41 +208,41 @@ class CornerAnnotationWidget:
     self.textLable4 = qt.QLabel()
     self.textLable4.setText("Text:")
 
-    self.leftBottomFrame = qt.QFrame()
-    self.leftBottomLayout = qt.QHBoxLayout()
-    self.leftBottomFrame.setLayout(self.leftBottomLayout)
-    annotationFormLayout.addRow("Left Bottom:", self.leftBottomFrame)
-
     self.leftUpperFrame = qt.QFrame()
     self.leftUpperLayout = qt.QHBoxLayout()
     self.leftUpperFrame.setLayout(self.leftUpperLayout)
     annotationFormLayout.addRow("Left Upper:", self.leftUpperFrame)
 
-    self.rightBottomFrame = qt.QFrame()
-    self.rightBottomLayout = qt.QHBoxLayout()
-    self.rightBottomFrame.setLayout(self.rightBottomLayout)
-    annotationFormLayout.addRow("Right Bottom:", self.rightBottomFrame)
+    self.leftBottomFrame = qt.QFrame()
+    self.leftBottomLayout = qt.QHBoxLayout()
+    self.leftBottomFrame.setLayout(self.leftBottomLayout)
+    annotationFormLayout.addRow("Left Bottom:", self.leftBottomFrame)
 
     self.rightUpperFrame = qt.QFrame()
     self.rightUpperLayout = qt.QHBoxLayout()
     self.rightUpperFrame.setLayout(self.rightUpperLayout)
     annotationFormLayout.addRow("Right Upper:", self.rightUpperFrame)
 
-    self.leftBottomFrame.layout().addWidget(self.leftBottomCheckBox)
-    self.leftBottomFrame.layout().addWidget(self.textLable1)
-    self.leftBottomFrame.layout().addWidget(self.leftBottomTextBox)
+    self.rightBottomFrame = qt.QFrame()
+    self.rightBottomLayout = qt.QHBoxLayout()
+    self.rightBottomFrame.setLayout(self.rightBottomLayout)
+    annotationFormLayout.addRow("Right Bottom:", self.rightBottomFrame)
 
     self.leftUpperFrame.layout().addWidget(self.leftUpperCheckBox)
     self.leftUpperFrame.layout().addWidget(self.textLable2)
     self.leftUpperFrame.layout().addWidget(self.leftUpperTextBox)
 
-    self.rightBottomFrame.layout().addWidget(self.rightBottomCheckBox)
-    self.rightBottomFrame.layout().addWidget(self.textLable3)
-    self.rightBottomFrame.layout().addWidget(self.rightBottomTextBox)
+    self.leftBottomFrame.layout().addWidget(self.leftBottomCheckBox)
+    self.leftBottomFrame.layout().addWidget(self.textLable1)
+    self.leftBottomFrame.layout().addWidget(self.leftBottomTextBox)
 
     self.rightUpperFrame.layout().addWidget(self.rightUpperCheckBox)
     self.rightUpperFrame.layout().addWidget(self.textLable4)
     self.rightUpperFrame.layout().addWidget(self.rightUpperTextBox)
+
+    self.rightBottomFrame.layout().addWidget(self.rightBottomCheckBox)
+    self.rightBottomFrame.layout().addWidget(self.textLable3)
+    self.rightBottomFrame.layout().addWidget(self.rightBottomTextBox)
 
     #
     # Configuration Area
@@ -613,7 +614,7 @@ class CornerAnnotationWidget:
       self.cornerAnnotationDisplay.GetTextProperty().ShadowOff()
 
   def fontSizeSliderValueChanged(self, fontSizeValue):
-    self.cornerAnnotationDisplay.SetMaximumFontSize(fontSizeValue)
+    self.cornerAnnotationDisplay.SetMaximumFontSize(int(fontSizeValue))
 
   def fontOpacitySliderValueChanged(self, fontOpacityValue):
     self.cornerAnnotationDisplay.GetTextProperty().SetOpacity(fontOpacityValue/100)
@@ -716,7 +717,6 @@ class CornerAnnotationWidget:
 
     if self.timerStopFlag == 1:
       self.timerStopFlag = 0
-      print("Qtimer was stopped.")
       self.t.stop()
 
   def stopWatchTimerCount(self):
