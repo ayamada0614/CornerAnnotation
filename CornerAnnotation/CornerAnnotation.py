@@ -917,9 +917,9 @@ class CornerAnnotationTest(unittest.TestCase):
     """Run as few or as many tests as needed here.
     """
     self.setUp()
-    self.test_CornerleftUpper()
+    self.test_CornerAnnotation()
 
-  def test_CornerleftUpper(self):
+  def test_CornerAnnotation(self):
     """ Ideally you should have several levels of tests.  At the lowest level
     tests sould exercise the functionality of the logic with different inputs
     (both valid and invalid).  At higher levels your tests should emulate the
