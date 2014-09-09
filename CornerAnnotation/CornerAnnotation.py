@@ -422,24 +422,25 @@ class CornerAnnotationWidget:
     self.cornerAnnotationDisplay.SetMaximumFontSize(20)
     self.cornerAnnotationDisplay.GetTextProperty().SetColor(1,0,0)
 
-    # Addition of corner annotation function to three D render window 
-    self.threeDRenderer = vtk.vtkRenderer()    
-    self.threeDRenderer = slicer.app.layoutManager().activeThreeDRenderer()
-    self.threeDRenderer.AddViewProp(self.cornerAnnotationDisplay)
-    self.threeDRenderWindow = self.threeDRenderer.GetRenderWindow()
-    self.threeDRenderWindow.Render()
+   # Addition of corner annotation function to three D render window 
+    layout = slicer.app.layoutManager()
+    if layout != None:
+        self.threeDRenderer = layout.activeThreeDRenderer()
+        self.threeDRenderer.AddViewProp(self.cornerAnnotationDisplay)
+        self.threeDRenderWindow = self.threeDRenderer.GetRenderWindow()
+        self.threeDRenderWindow.Render()
 
-    self.redRenderer = slicer.app.layoutManager().sliceWidget('Red').sliceView().renderWindow().GetRenderers().GetFirstRenderer()
-    self.redRenderWindow = self.redRenderer.GetRenderWindow()
-    self.redRenderWindow.Render()
+        self.redRenderer = layout.sliceWidget('Red').sliceView().renderWindow().GetRenderers().GetFirstRenderer()
+        self.redRenderWindow = self.redRenderer.GetRenderWindow()
+        self.redRenderWindow.Render()
 
-    self.yellowRenderer = slicer.app.layoutManager().sliceWidget('Yellow').sliceView().renderWindow().GetRenderers().GetFirstRenderer()
-    self.yellowRenderWindow = self.yellowRenderer.GetRenderWindow()
-    self.yellowRenderWindow.Render()
+        self.yellowRenderer = layout.sliceWidget('Yellow').sliceView().renderWindow().GetRenderers().GetFirstRenderer()
+        self.yellowRenderWindow = self.yellowRenderer.GetRenderWindow()
+        self.yellowRenderWindow.Render()
 
-    self.greenRenderer = slicer.app.layoutManager().sliceWidget('Green').sliceView().renderWindow().GetRenderers().GetFirstRenderer()
-    self.greenRenderWindow = self.greenRenderer.GetRenderWindow()
-    self.greenRenderWindow.Render()
+        self.greenRenderer = layout.sliceWidget('Green').sliceView().renderWindow().GetRenderers().GetFirstRenderer()
+        self.greenRenderWindow = self.greenRenderer.GetRenderWindow()
+        self.greenRenderWindow.Render()
 
     # QTimer
     self.t = qt.QTimer();
