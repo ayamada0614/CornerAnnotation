@@ -489,7 +489,6 @@ class CornerAnnotationWidget:
 
   def onStopButton(self):
     if(self.stopWatchTimerStartFlag == 1):
-        print("stopWatchTimer was stopped.")
         self.stopWatchTimer.stop()
     self.stopWatchTimerStartFlag = 0
 
