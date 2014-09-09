@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8.9)
 
 project(CornerAnnotation)
 
+set(EXTENSION_NAME CornerAnnotation)
 set(EXTENSION_HOMEPAGE "http://www.slicer.org/slicerWiki/index.php/Documentation/Nightly/Extensions/CornerAnnotation")
 set(EXTENSION_CATEGORY "IGT")
 set(EXTENSION_CONTRIBUTORS "Atsushi Yamada (Shiga University of Medical Science)")
