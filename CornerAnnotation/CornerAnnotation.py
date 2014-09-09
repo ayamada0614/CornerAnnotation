@@ -423,6 +423,7 @@ class CornerAnnotationWidget:
     self.cornerAnnotationDisplay.GetTextProperty().SetColor(1,0,0)
 
     # Addition of corner annotation function to three D render window 
+    self.threeDRenderer = vtk.vtkRenderer()    
     self.threeDRenderer = slicer.app.layoutManager().activeThreeDRenderer()
     self.threeDRenderer.AddViewProp(self.cornerAnnotationDisplay)
     self.threeDRenderWindow = self.threeDRenderer.GetRenderWindow()
