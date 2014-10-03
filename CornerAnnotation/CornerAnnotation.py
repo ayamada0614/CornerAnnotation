@@ -692,6 +692,34 @@ class CornerAnnotationWidget:
     return (Message) 
 
   def tCount(self):
+
+    # If "Slice View Annotations" is checked, the corner annoatations except the 3D view will be disabled.   
+    if slicer.modules.DataProbeInstance.infoWidget.sliceAnnoations.sliceViewAnnotationsCheckBox.checked == True:
+
+      if self.redViewCheckBox.enabled == True:
+        self.redViewCheckBox.enabled = False
+        self.yellowViewCheckBox.enabled = False
+        self.greenViewCheckBox.enabled = False
+
+        if self.redViewCheckBox.checked == True:
+            self.redRenderer.RemoveViewProp(self.cornerAnnotationDisplay)
+        if self.yellowViewCheckBox.checked == True:
+            self.yellowRenderer.RemoveViewProp(self.cornerAnnotationDisplay)
+        if self.greenViewCheckBox.checked == True:
+            self.greenRenderer.RemoveViewProp(self.cornerAnnotationDisplay)
+    else:
+      if self.redViewCheckBox.enabled == False:
+        self.redViewCheckBox.enabled = True
+        self.yellowViewCheckBox.enabled = True
+        self.greenViewCheckBox.enabled = True
+
+        if self.redViewCheckBox.checked == True:
+            self.redRenderer.AddViewProp(self.cornerAnnotationDisplay)
+        if self.yellowViewCheckBox.checked == True:
+            self.yellowRenderer.AddViewProp(self.cornerAnnotationDisplay)
+        if self.greenViewCheckBox.checked == True:
+            self.greenRenderer.AddViewProp(self.cornerAnnotationDisplay)
+
     if self.rightUpperFlag + self.rightBottomFlag + self.leftUpperFlag + self.leftBottomFlag < 4:
       self.cornerAnnotationDisplay.ClearAllTexts()
 
