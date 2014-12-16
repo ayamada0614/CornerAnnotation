@@ -11,12 +11,12 @@ class CornerAnnotation:
     parent.title = "CornerAnnotation" # TODO make this more human readable by adding spaces
     parent.categories = ["IGT"]
     parent.dependencies = []
-    parent.contributors = ["Atsushi Yamada (SUMS), Junichi Tokuda (Brigham and Women's Hospital), Koichiro Murakami (BWH, SUMS), Soichiro Tani (SUMS), Shigeyuki Naka (SUMS), Tohru Tani (SUMS)"] # replace with "Firstname Lastname (Org)"
+    parent.contributors = ["Atsushi Yamada (Shiga University of Medical Science in Japan), Junichi Tokuda (Brigham and Women's Hospital), Koichiro Murakami (SUMS), Soichiro Tani (BWH, SUMS), Shigeyuki Naka (SUMS), Tohru Tani (SUMS)"] # replace with "Firstname Lastname (Org)"
     parent.helpText = """
-    This module allows user to create annotations including timer count and transform node elements and display them. The details are in http://www.slicer.org/slicerWiki/index.php/Documentation/Nightly/Modules/CornerAnnotation
+    This module allows user to create annotations including timer count and transform node elements and display them. The details are in <a href=http://www.slicer.org/slicerWiki/index.php/Documentation/Nightly/Modules/CornerAnnotation>the online documentation</a>.
     """
     parent.acknowledgementText = """
-    This module was developed by Atsushi Yamada (Shiga University of Medical Science in Japan), Bio-Medical Innovation Center and Department of Surgery, Shiga University of Medical Science. 
+    This work is supported by Bio-Medical Innovation Center and Department of Surgery, Shiga University of Medical Science in Japan. 
 """ # replace with organization, grant and thanks.
     self.parent = parent
 
@@ -694,7 +694,7 @@ class CornerAnnotationWidget:
   def tCount(self):
 
     # If "Slice View Annotations" is checked, the corner annoatations except the 3D view will be disabled.   
-    if slicer.modules.DataProbeInstance.infoWidget.sliceAnnoations.sliceViewAnnotationsCheckBox.checked == True:
+    if slicer.modules.DataProbeInstance.infoWidget.sliceAnnotations.sliceViewAnnotationsCheckBox.checked == True:
 
       if self.redViewCheckBox.enabled == True:
         self.redViewCheckBox.enabled = False
